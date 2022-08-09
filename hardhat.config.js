@@ -1,7 +1,11 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
+require("dotenv").config();
 const fs = require('fs');
 // const infuraId = fs.readFileSync(".infuraid").toString().trim() || "";
+
+const PRIVATE_KEY = process.env.PRIVATE_KEY
+// const URL = process.env.URL
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
@@ -18,8 +22,8 @@ module.exports = {
       chainId: 1337
     },
     goerli: {
-      url: "<YOUR_ALCHEMY_URL>",
-      accounts: [ "<YOUR_PRIVATE_KEY>" ]
+      url: `${process.env.URL}`,
+      accounts: [PRIVATE_KEY]
     }
   },
   solidity: {
